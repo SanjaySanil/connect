@@ -1,6 +1,7 @@
 import 'package:connect/models/message_data.dart';
 import 'package:connect/theme/theme.dart';
 import 'package:connect/widgets/avatar.dart';
+import 'package:connect/widgets/glowing_action_button.dart';
 import 'package:connect/widgets/icon_buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,14 @@ class ChatScreen extends StatelessWidget {
           )
         ],
       ),
-      body:_DemoMessageList(),
+      body: Column(
+        children: [
+          Expanded(
+            child: _DemoMessageList(),
+          ),
+          _ActionBar(),
+        ],
+      ),
     );
   }
 }
@@ -74,7 +82,7 @@ class _DemoMessageList extends StatelessWidget {
           message: "Who are you  ",
           messageDate: "12:00 PM",
         ),
-         _MessageOwnTile(
+        _MessageOwnTile(
           message: "Im pavan myre!!",
           messageDate: "12:00 PM",
         ),
@@ -130,7 +138,7 @@ class _MessageTile extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(_borderRadius),
                     topRight: Radius.circular(_borderRadius),
-                    bottomRight : Radius.circular(_borderRadius)),
+                    bottomRight: Radius.circular(_borderRadius)),
               ),
               child: Padding(
                 padding:
@@ -188,7 +196,7 @@ class _MessageOwnTile extends StatelessWidget {
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal:12),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
                 child: Text(
                   message,
                   style: const TextStyle(
@@ -289,6 +297,45 @@ class _ActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SafeArea(
+      bottom: true,
+      top: false,
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                  width: 2,
+                  color: Theme.of(context).dividerColor,
+                ),
+              ),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Icon(CupertinoIcons.camera_fill),
+            ),
+          ),
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: TextField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    hintText: "Message", border: InputBorder.none),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12, right: 24.0),
+            child: GlowingActionButton(
+              onTap: () {},
+              color: AppColors.accent,
+              icon: Icons.send_rounded,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
