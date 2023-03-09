@@ -28,37 +28,46 @@ class _BottomNavigationBarCreatedState
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: true,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          NavigationBarItems(
-              isSelected: (selectedIndex == 0),
-              onTap: handleItemsSelected,
-              index: 0,
-              iconData: CupertinoIcons.bubble_left_bubble_right_fill,
-              label: "Messages"),
-          NavigationBarItems(
-              isSelected:(selectedIndex==1),
-              onTap: handleItemsSelected,
-              index: 1,
-              iconData: CupertinoIcons.bell_solid,
-              label: "Notifications"),
-          NavigationBarItems(
-              isSelected: (selectedIndex == 2),
-              onTap: handleItemsSelected,
-              index: 2,
-              iconData: CupertinoIcons.phone_fill,
-              label: "Calls"),
-          NavigationBarItems(
-              isSelected: (selectedIndex == 3),
-              onTap: handleItemsSelected,
-              index: 3,
-              iconData: CupertinoIcons.person_2_fill,
-              label: "Contacts"),
-        ],
+    final brightness =Theme.of(context).brightness;
+    return Card(
+      color:(brightness==Brightness.light)?Colors.transparent:null,
+      elevation:0,
+      margin:const EdgeInsets.all(0),
+      child: SafeArea(
+        top: false,
+        bottom: true,
+        child: Padding(
+          padding: const EdgeInsets.only(top:16,left:8,right:8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              NavigationBarItems(
+                  isSelected: (selectedIndex == 0),
+                  onTap: handleItemsSelected,
+                  index: 0,
+                  iconData: CupertinoIcons.bubble_left_bubble_right_fill,
+                  label: "Messages"),
+              NavigationBarItems(
+                  isSelected:(selectedIndex==1),
+                  onTap: handleItemsSelected,
+                  index: 1,
+                  iconData: CupertinoIcons.bell_solid,
+                  label: "Notifications"),
+              NavigationBarItems(
+                  isSelected: (selectedIndex == 2),
+                  onTap: handleItemsSelected,
+                  index: 2,
+                  iconData: CupertinoIcons.phone_fill,
+                  label: "Calls"),
+              NavigationBarItems(
+                  isSelected: (selectedIndex == 3),
+                  onTap: handleItemsSelected,
+                  index: 3,
+                  iconData: CupertinoIcons.person_2_fill,
+                  label: "Contacts"),
+            ],
+          ),
+        ),
       ),
     );
   }

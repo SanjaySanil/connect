@@ -5,6 +5,7 @@ import 'package:connect/pages/notifications_page.dart';
 import 'package:connect/screens/home_screen/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:connect/widgets/avatar.dart';
 import 'package:connect/widgets/helpers.dart';
+import 'package:connect/widgets/icon_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -18,16 +19,13 @@ class HomeScreen extends StatelessWidget {
     CallPage(),
     ContactPage(),
   ];
-  final pageTitles=[
-    'Messages',
-    'Notifications',
-    'Calls',
-    'Contacts'
-  ];
+  final pageTitles = ['Messages', 'Notifications', 'Calls', 'Contacts'];
+
   void onNavigationItemSelected(index) {
     pageIndex.value = index;
-    title.value=pageTitles[index];
+    title.value = pageTitles[index];
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +36,7 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       appBar: AppBar(
+        iconTheme:Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -50,10 +49,16 @@ class HomeScreen extends StatelessWidget {
             );
           },
         ),
+        leadingWidth:54,
+        leading: Align(
+            alignment: Alignment.centerRight,
+            child: IconBackground(icon: Icons.search, onTap: () {})),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right:24),
-            child: Avatar.small(url:Helper.randomPictureUrl(),),
+            padding: const EdgeInsets.only(right: 24),
+            child: Avatar.small(
+              url: Helper.randomPictureUrl(),
+            ),
           )
         ],
       ),
